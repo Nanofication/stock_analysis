@@ -10,14 +10,19 @@ class Trendline():
         self.endPivot = endPivot
         self.pivots = pivots
         self.slope, self.yIntercept = math_calcs.getLineGraph(startPivot[2], startPivot[1], endPivot[2], endPivot[1])
-        self.marginOfError = 0.05
+        self.marginOfError = 0.1
+        self.score = 0
 
     def calcTouchPoints(self):
         touchPoint = 0
         for p in self.pivots:
-            if self.yIntercept + self.slope * p[2] == p[1] * self.marginOfError:
+            if abs(self.yIntercept + self.slope * p[2] - p[1]) < ((self.yIntercept + self.slope * p[2]) * self.marginOfError):
                 touchPoint += 1
+
+        self.score = touchPoint
+
         return touchPoint
+
 
 def getData(ticker):
     try:
@@ -57,7 +62,7 @@ def getPivotPoints(df):
 
     return supportPivots, resistancePivots
 
-def generateTrendLine(pivots, startTime, endTime):
+def generateTrendLine(pivots, startTime=0, endTime=0, reverse=False):
     """
     Sort the pivots by ascending or descending order
     Graph a line between the 2 points and check how many pivot points touch it
@@ -68,9 +73,26 @@ def generateTrendLine(pivots, startTime, endTime):
     :param endTime:
     :return:
     """
+    sortedPivots = sorted(pivots,key=lambda x:x[1],reverse=reverse)
+    p1 = sortedPivots[0]
+    prevDate = p1[0]
+    highScore = 0
+    pair = {}
 
+    for piv in sortedPivots[1:]:
+        if not (prevDate > piv[0]):
+            trendPoint = Trendline(p1, piv, sortedPivots).calcTouchPoints()
+            if highScore < trendPoint:
+                highScore = trendPoint
+                pair = {
+                        'Date1': p1[0], # .strftime("%Y-%m-%d"),
+                        'Pivot1': p1[1],
+                        'Date2': piv[0], # .strftime("%Y-%m-%d"),
+                        'Pivot2': piv[1]
+                    }
+                prevDate = pair['Date2']
 
-    return 0
+    return pair
 
 if __name__ == '__main__':
     stockData = getData('AAPL')
@@ -79,9 +101,11 @@ if __name__ == '__main__':
     print(up)
 
     print(Trendline(up[0], up[10], up).calcTouchPoints())
-
-    trendLine = [(up[0][0].strftime("%Y-%m-%d"), up[0][1]), (up[10][0].strftime("%Y-%m-%d"), up[10][1])]
+    pair = generateTrendLine(up)
+    # trendLine = [(up[0][0].strftime("%Y-%m-%d"), up[0][1]), (up[10][0].strftime("%Y-%m-%d"), up[10][1])]
     # trendLine = [('2020-01-02', 73.79), ('2021-03-02', 128.72)]
+
+    trendLine = [(pair['Date1'].strftime("%Y-%m-%d"), pair['Pivot1']), (pair['Date2'].strftime("%Y-%m-%d"), pair['Pivot2'])]
 
     fplt.plot(
         stockData,
