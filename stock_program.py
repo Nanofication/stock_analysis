@@ -28,8 +28,8 @@ def getData(ticker):
     try:
         stockData = data.DataReader(ticker,
                                     'yahoo',
-                                    '2020-1-1',
-                                    '2021-3-8')
+                                    '2021-1-1',
+                                    '2021-2-19')
 
         stockData.insert(loc=0, column='Counter', value=np.arange(len(stockData)))
         stockData = stockData.reset_index()
@@ -50,15 +50,21 @@ def getPivotPoints(df):
     resistancePivots = []
     supportPivots = []
     prevBarIsGreen = df['Close'].iloc[0] > df['Open'].iloc[0]
+    prevClose = df['Close'].iloc[0]
+    prevOpen = df['Open'].iloc[0]
     print(prevBarIsGreen)
 
     for index, row in df.iloc[1:].iterrows():
         if row['Close'] > row['Open'] and prevBarIsGreen == False:
-            supportPivots.append((index.to_pydatetime(),row['Open'], row['Counter'])) # Note: You could have prev red candle as start of pivot (OR?)
+            num = prevClose if prevClose < row['Open'] else row['Open']
+            supportPivots.append((index.to_pydatetime(),num, row['Counter'])) # Note: You could have prev red candle as start of pivot (OR?)
             prevBarIsGreen = True
         elif row['Close'] < row['Open'] and prevBarIsGreen:
-            resistancePivots.append((index.to_pydatetime(),row['Open'], row['Counter']))
+            num = prevClose if prevClose > row['Open'] else row['Open']
+            resistancePivots.append((index.to_pydatetime(),num, row['Counter']))
             prevBarIsGreen = False
+        prevClose = row['Close']
+        prevOpen = row['Open']
 
     return supportPivots, resistancePivots
 
@@ -95,13 +101,13 @@ def generateTrendLine(pivots, startTime=0, endTime=0, reverse=False):
     return pair
 
 if __name__ == '__main__':
-    stockData = getData('AAPL')
+    stock = 'AAPL'
+    stockData = getData(stock)
     print(stockData.head())
     up, down = getPivotPoints(stockData)
     print(up)
 
-    print(Trendline(up[0], up[10], up).calcTouchPoints())
-    pair = generateTrendLine(up)
+    pair = generateTrendLine(down,reverse=True)
     # trendLine = [(up[0][0].strftime("%Y-%m-%d"), up[0][1]), (up[10][0].strftime("%Y-%m-%d"), up[10][1])]
     # trendLine = [('2020-01-02', 73.79), ('2021-03-02', 128.72)]
 
@@ -111,7 +117,7 @@ if __name__ == '__main__':
         stockData,
         type='candle',
         style='charles',
-        title='Apple',
+        title=stock,
         ylabel='Price',
         alines=trendLine
     )
