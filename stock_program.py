@@ -28,7 +28,7 @@ def getData(ticker):
     try:
         stockData = data.DataReader(ticker,
                                     'yahoo',
-                                    '2021-1-1',
+                                    '2020-1-1',
                                     '2021-2-19')
 
         stockData.insert(loc=0, column='Counter', value=np.arange(len(stockData)))
@@ -101,7 +101,7 @@ def generateTrendLine(pivots, startTime=0, endTime=0, reverse=False):
     return pair
 
 if __name__ == '__main__':
-    stock = 'AAPL'
+    stock = 'TSLA'
     stockData = getData(stock)
     print(stockData.head())
     up, down = getPivotPoints(stockData)
@@ -119,6 +119,7 @@ if __name__ == '__main__':
         style='charles',
         title=stock,
         ylabel='Price',
-        alines=trendLine
+        alines=trendLine,
+        mav=50
     )
 
