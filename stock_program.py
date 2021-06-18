@@ -101,7 +101,7 @@ def generateTrendLine(pivots, startTime=0, endTime=0, reverse=False):
     return pair
 
 if __name__ == '__main__':
-    stock = 'TSLA'
+    stock = 'AAPL'
     stockData = getData(stock)
     print(stockData.head())
     up, down = getPivotPoints(stockData)
