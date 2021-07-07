@@ -1,7 +1,7 @@
 from pandas_datareader import data
 from pandas_datareader._utils import RemoteDataError
 from pandas.tseries.offsets import BDay
-from utils import math_calcs
+from utils import math_calcs, stock_utils
 import pandas as pd
 import numpy as np
 import datetime
@@ -9,7 +9,7 @@ import datetime
 def getData(ticker, start, end):
     try:
         stockData = data.DataReader(ticker,
-                                    'yahoo',
+                                    'stooq',
                                     start,
                                     end)
 
@@ -17,6 +17,7 @@ def getData(ticker, start, end):
         stockData = stockData.reset_index()
         stockData = stockData.astype({'Date': 'datetime64'})
         stockData = stockData.set_index('Date')
+        stockData = stockData.sort_values(by='Date')
         return stockData
     except RemoteDataError:
         print('No Data found for {0}'.format(ticker))
@@ -176,13 +177,14 @@ class EMACrossoverTrading:
             if isCrossedOverNegative:
                 exitPrice = row['Close']
                 exitDate = index.to_pydatetime()
-                backTestData = backTestData.append({'Start Date':enterDate,
-                                     'End Date': exitDate,
-                                     'Entry Price': enterPrice,
-                                     'Exit Price': exitPrice,
-                                     'Shares Bought': sharesBought,
-                                     'PnL': (exitPrice - enterPrice) * sharesBought,
-                                     'Win or Loss': 'Win' if exitPrice - enterPrice > 0 else 'Loss'}, ignore_index=True)
+                backTestData = backTestData.append(
+                    {'Start Date':enterDate,
+                     'End Date': exitDate,
+                     'Entry Price': enterPrice,
+                     'Exit Price': exitPrice,
+                     'Shares Bought': sharesBought,
+                     'PnL': (exitPrice - enterPrice) * sharesBought,
+                     'Win or Loss': 'Win' if exitPrice - enterPrice > 0 else 'Loss'}, ignore_index=True)
 
                 prevIsNegative = True
 
@@ -190,10 +192,37 @@ class EMACrossoverTrading:
         return backTestData
 
 if __name__ == '__main__':
-    stock = 'AAPL'
-    ma = EMACrossoverTrading('ABNB', datetime.date(2020,1,2), datetime.date(2021,6,17))
-    df = ma.generateEMAData()
-    print(ma.backTest(df, 10000))
+    # stock = 'AAPL' #TODO: API Crashed, check results tomorrow (We may need to figure out a way to pull and calculate data faster
+    # ma = EMACrossoverTrading('CWH', datetime.date(2020,1,2), datetime.date(2021,7,5))
+    # df = ma.generateEMAData()
+    # print(ma.backTest(df, 10000))
+
+    df = stock_utils.getAllStocks()
+    df = df[df['Has Data']==1]
+    df = df[df['Market Cap']> 3000000000]
+
+    winLossEma = pd.DataFrame(columns=['Symbol','Start Date', 'End Date', 'Entry Price', 'Shares Bought', 'Exit Price', 'PnL', 'Win or Loss', 'Win Loss Percent'])
+
+    count = 0
+
+    for index, row in df.iterrows():
+        ma = EMACrossoverTrading(row['Symbol'], datetime.date(2020, 1, 2), datetime.date(2021, 6, 23))
+        try:
+            emaData = ma.generateEMAData()
+            ma = ma.backTest(emaData,10000)
+
+            winLoss = len(ma[ma['Win or Loss']== 'Win'])/len(ma)
+            result = pd.concat([pd.DataFrame({'Symbol': [row['Symbol']] * len(ma)}), ma,
+                                pd.DataFrame({'Win Loss Percent': [winLoss] * len(ma)})], axis=1)
+            winLossEma = winLossEma.append(result)
+        except Exception as e:
+            print(e)
+        count += 1
+
+        if count > 10:
+            break
+
+    print(winLossEma[['Symbol','Win Loss Percent']].drop_duplicates())
 
     # ma = MATrading('ABNB', datetime.date(2020,1,2), datetime.date(2021,6,3))
     # stockData = ma.generateMAData()
