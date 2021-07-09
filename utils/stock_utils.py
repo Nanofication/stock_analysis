@@ -2,9 +2,64 @@ from pandas_datareader import data
 from pandas_datareader._utils import RemoteDataError
 from pandas.tseries.offsets import BDay
 from dask import delayed
+from config.configuration import TD_API
 import pandas
 import datetime
 import numpy as np
+import requests
+
+EPOCH = datetime.datetime.utcfromtimestamp(0)
+
+HOUR_ADJUSTMENT = 5
+
+### FOR TD API ###
+
+def unixTimeMs(dateAndTime):
+    """
+    Convert datetime to milliseconds subtract epoch time. Feed back the integers for API
+    :param dateAndTime: Datetime of specific date
+    :return: Integer representation of milliseconds
+    """
+    dateAndTime = dateAndTime + datetime.timedelta(hours=HOUR_ADJUSTMENT)
+    return int((dateAndTime - EPOCH).total_seconds() * 1000.0)
+
+def convertToEST(timestamp):
+    """
+    Convert timestamps in json data's candles to EST
+    :return: Time in EST format
+    """
+    newDateTime = datetime.datetime.fromtimestamp(timestamp/1000)
+    return newDateTime.date(), newDateTime.time()
+
+def convertData(data):
+    """
+    Adjust raw json data to usable stock data
+    :param data: Json data of candles
+    :return: Usable stock data
+    """
+    for candle in data['candles']:
+        candle['date'],candle['time'] = convertToEST(candle['datetime'])
+
+    return data
+
+###
+
+def getStockDataTD(symbol, startDate, endDate):
+    priceHistory = "https://api.tdameritrade.com/v1/marketdata/{symbol}/pricehistory".format(symbol=symbol)
+    dailyChartPayLoad = {
+        'apikey': TD_API['API_KEY'],
+        'periodType': 'year',
+        'frequencyType': 'daily',
+        'frequency': '1',
+        'period': '1',
+        'endDate': str(unixTimeMs(endDate)),
+        'startDate': str(unixTimeMs(startDate)),
+        'needExtendedHoursData': 'False'
+    }
+    content = requests.get(url=priceHistory, params=dailyChartPayLoad)
+    data = content.json()
+    data = convertData(data)
+    return pandas.DataFrame(data['candles'])
 
 def getAllStocks():
     """
@@ -55,18 +110,28 @@ def updateStockInfo(df, date):
 
 if __name__ == '__main__':
     # print("Getting all stocks")
-    df = pandas.read_excel('D:\The Fastlane Project\Coding Projects\Stock Analysis\stocks\stock_data.xlsx')
+    dateTimeStrStart = '2021-1-2 16:00'
+    dateTimeStrEnd = '2021-7-8 16:00'
+    dateTimeStart = datetime.datetime.strptime(dateTimeStrStart, '%Y-%m-%d %H:%M')
+    dateTimeEnd = datetime.datetime.strptime(dateTimeStrEnd, '%Y-%m-%d %H:%M')
 
-    # print(df)
-    df2 = parallelUpdate(df, datetime.date(2021,6,20))
-    df2 = df2.compute()
+    print(getStockDataTD('NIO', dateTimeStart, dateTimeEnd))
 
-    data = []
-    for x in df2:
-        data.append(pandas.DataFrame(x))
 
-    # print(df.loc[0])
-    # print(df2.loc[0])
-    finalDf = pandas.concat(data)
-    print("out")
-    finalDf.to_excel('D:\The Fastlane Project\Coding Projects\Stock Analysis\stocks\stock_data_2.xlsx', engine='xlsxwriter', index=False)
+    ### PARALLEL PROCESSING
+
+    # df = pandas.read_excel('D:\The Fastlane Project\Coding Projects\Stock Analysis\stocks\stock_data.xlsx')
+    #
+    # # print(df)
+    # df2 = parallelUpdate(df, datetime.date(2021,6,20))
+    # df2 = df2.compute()
+    #
+    # data = []
+    # for x in df2:
+    #     data.append(pandas.DataFrame(x))
+    #
+    # # print(df.loc[0])
+    # # print(df2.loc[0])
+    # finalDf = pandas.concat(data)
+    # print("out")
+    # finalDf.to_excel('D:\The Fastlane Project\Coding Projects\Stock Analysis\stocks\stock_data_2.xlsx', engine='xlsxwriter', index=False)

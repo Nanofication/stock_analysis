@@ -6,6 +6,22 @@ import pandas as pd
 import numpy as np
 import datetime
 
+def getTDData(ticker, start, end):
+    try:
+        stockData = data.DataReader(ticker,
+                                    'stooq',
+                                    start,
+                                    end)
+
+        stockData.insert(loc=0, column='Counter', value=np.arange(len(stockData)))
+        stockData = stockData.reset_index()
+        stockData = stockData.astype({'Date': 'datetime64'})
+        stockData = stockData.set_index('Date')
+        stockData = stockData.sort_values(by='Date')
+        return stockData
+    except RemoteDataError:
+        print('No Data found for {0}'.format(ticker))
+
 def getData(ticker, start, end):
     try:
         stockData = data.DataReader(ticker,
@@ -150,7 +166,7 @@ class EMACrossoverTrading:
         df['EMA_{0}'.format(self.ema2)] = df['Close'].ewm(span=self.ema2).mean()
         return df
 
-    def backTest(self, df, moneySpent):
+    def backTest(self, df, moneySpent=0, shareCount = 0):
         """
         Back test this strategy against this stock and generate df of number of success failures and profit and losses
         :return: df
@@ -171,7 +187,7 @@ class EMACrossoverTrading:
             if isCrossedOverPositive:
                 enterPrice = row['Open']
                 enterDate = index.to_pydatetime()
-                sharesBought = moneySpent//enterPrice
+                sharesBought = shareCount if shareCount else moneySpent//enterPrice
                 prevIsNegative = False
 
             if isCrossedOverNegative:
@@ -189,7 +205,7 @@ class EMACrossoverTrading:
                 prevIsNegative = True
 
 
-        return backTestData
+        return backTestData.iloc[1:]
 
 if __name__ == '__main__':
     # stock = 'AAPL' #TODO: API Crashed, check results tomorrow (We may need to figure out a way to pull and calculate data faster
@@ -222,7 +238,7 @@ if __name__ == '__main__':
         if count > 10:
             break
 
-    print(winLossEma[['Symbol','Win Loss Percent']].drop_duplicates())
+    winLossEma[['Symbol','Win Loss Percent']].drop_duplicates().to_excel("D:/The Fastlane Project/Coding Projects/Stock Analysis/results/win_loss.xlsx")
 
     # ma = MATrading('ABNB', datetime.date(2020,1,2), datetime.date(2021,6,3))
     # stockData = ma.generateMAData()
