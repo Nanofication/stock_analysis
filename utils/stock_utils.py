@@ -59,7 +59,9 @@ def getStockDataTD(symbol, startDate, endDate):
     content = requests.get(url=priceHistory, params=dailyChartPayLoad)
     data = content.json()
     data = convertData(data)
-    return pandas.DataFrame(data['candles'])
+    data = pandas.DataFrame(data['candles'])
+    data.columns = data.columns.str.capitalize()
+    return data
 
 def getAllStocks():
     """
@@ -107,6 +109,10 @@ def updateStockInfo(df, date):
             df.at[index, 'Has Data'] = 0
             print('No Data found for {0}'.format(index))
     return [df.to_dict()]
+
+def readStockData(symbol):
+    df = pandas.read_excel('D:/The Fastlane Project/Coding Projects/Stock Analysis/results/stock_data/{0}_Data.xlsx'.format(symbol), index_col=0)
+    return df
 
 if __name__ == '__main__':
     # print("Getting all stocks")

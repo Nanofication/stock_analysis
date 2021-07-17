@@ -6,12 +6,11 @@ import pandas as pd
 import numpy as np
 import datetime
 
-def getTDData(ticker, start, end):
+def getTDData(ticker,start,end):
     try:
-        stockData = data.DataReader(ticker,
-                                    'stooq',
-                                    start,
-                                    end)
+        stockData = stock_utils.getStockDataTD(ticker,
+                                               datetime.datetime.strptime(start, '%Y-%m-%d'),
+                                               datetime.datetime.strptime(end, '%Y-%m-%d'))
 
         stockData.insert(loc=0, column='Counter', value=np.arange(len(stockData)))
         stockData = stockData.reset_index()
@@ -158,10 +157,10 @@ class EMACrossoverTrading:
         start = start.strftime('%Y-%m-%d')
         end = self.endDate.strftime('%Y-%m-%d')
 
-        return getData(self.ticker, start, end)
+        return getTDData(self.ticker, start, end)
 
-    def generateEMAData(self):
-        df = self.generateStockDate()
+    def generateEMAData(self, stockData=None):
+        df = stockData if not stockData.empty else self.generateStockDate()
         df['EMA_{0}'.format(self.ema1)] = df['Close'].ewm(span=self.ema1).mean()
         df['EMA_{0}'.format(self.ema2)] = df['Close'].ewm(span=self.ema2).mean()
         return df
