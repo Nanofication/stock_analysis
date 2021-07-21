@@ -161,9 +161,12 @@ class EMACrossoverTrading:
 
     def generateEMAData(self, stockData=None):
         df = stockData if not stockData.empty else self.generateStockDate()
-        df['EMA_{0}'.format(self.ema1)] = df['Close'].ewm(span=self.ema1).mean()
-        df['EMA_{0}'.format(self.ema2)] = df['Close'].ewm(span=self.ema2).mean()
-        return df
+        ema1 = 'EMA_{0}'.format(self.ema1)
+        ema2 = 'EMA_{0}'.format(self.ema2)
+        df[ema1] = df['Close'].ewm(span=self.ema1).mean()
+        df[ema2] = df['Close'].ewm(span=self.ema2).mean()
+        df['Is Positive'] = df[ema1].ge(df[ema2])
+        return df[[ema1,ema2,'Is Positive']]
 
     def backTest(self, df, moneySpent=0, shareCount = 0):
         """
