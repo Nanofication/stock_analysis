@@ -206,6 +206,7 @@ class EMACrossoverTrading:
 
                 prevIsNegative = True
 
+        backTestData = backTestData.set_index('Start Date')
 
         return backTestData.iloc[1:]
 
