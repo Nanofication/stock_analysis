@@ -5,6 +5,7 @@ from utils import math_calcs, stock_utils
 import pandas as pd
 import numpy as np
 import datetime
+import mplfinance as fplt
 
 def getTDData(ticker,start,end):
     try:
@@ -116,32 +117,51 @@ class Trendline():
         return touchPoint
 
 class MATrading:
+    """
+    50 MA is a commonly used support level by stock community
+    The key is to trade or enter when the stock is near but not breaking down
+    past the 50 MA level
+    """
     def __init__(self, ticker, startDate, endDate, ma=50):
         self.ticker = ticker
         self.ma = ma
         self.startDate = startDate
         self.endDate = endDate
         self.marginOfError = 0.05
+        self.datesCloseToMa = []
 
     def generateStockDate(self):
         start = self.startDate - BDay(self.ma)
         start = start.strftime('%Y-%m-%d')
         end = self.endDate.strftime('%Y-%m-%d')
 
-        return getData(self.ticker, start, end)
+        return getTDData(self.ticker, start, end)
 
-    def generateMAData(self):
-        df = self.generateStockDate()
+    def generateMAData(self,stockData=None):
+        df = stockData if stockData else self.generateStockDate()
         df['MA'] = df.rolling(window=self.ma)['Close'].mean()
         return df
 
-    def findPivotsCloseToMa(self, df):
-        up, down = getPivotPoints(df)
-        allPivots = up.extend(down)
-        for pv in allPivots:
-            # Is PV below
-            print(pv)
-            # distance formula, get closest pivots - maybe have a margin of error?
+    def findCloseNearMa(self, df, percentDiff=0.03):
+        """
+        Find all close price above the MA line
+        :param df: Dataframe with MA data
+        :param percentDiff: percent difference
+        :return: Dates where the close is within the percent Diff and above MA
+        """
+        df['Within Range'] = ((df['Close'] - df['MA'])/100 >= 0.0) & ((df['Close'] - df['MA'])/100 <= percentDiff) & (df['Close'] - df['Open'] > 0.0)
+        self.datesCloseToMa = df[df['Within Range'] == True].index.date.tolist()
+        return self.datesCloseToMa
+
+
+class MACrossoverTrading:
+    def __init__(self, ticker, startDate, endDate, ma1=50, ma2=200):
+        self.ticker = ticker
+        self.ma1 = ma1
+        self.ma2 = ma2
+        self.startDate = startDate
+        self.endDate = endDate
+        self.lookback = self.ma2 if self.ma2 > self.ma1 else self.ma1
 
 class EMACrossoverTrading:
     def __init__(self, ticker, startDate, endDate, ema1=5, ema2=20):
@@ -216,38 +236,51 @@ if __name__ == '__main__':
     # df = ma.generateEMAData()
     # print(ma.backTest(df, 10000))
 
-    df = stock_utils.getAllStocks()
-    df = df[df['Has Data']==1]
-    df = df[df['Market Cap']> 3000000000]
-
-    winLossEma = pd.DataFrame(columns=['Symbol','Start Date', 'End Date', 'Entry Price', 'Shares Bought', 'Exit Price', 'PnL', 'Win or Loss', 'Win Loss Percent'])
-
-    count = 0
-
-    for index, row in df.iterrows():
-        ma = EMACrossoverTrading(row['Symbol'], datetime.date(2020, 1, 2), datetime.date(2021, 6, 23))
-        try:
-            emaData = ma.generateEMAData()
-            ma = ma.backTest(emaData,10000)
-
-            winLoss = len(ma[ma['Win or Loss']== 'Win'])/len(ma)
-            result = pd.concat([pd.DataFrame({'Symbol': [row['Symbol']] * len(ma)}), ma,
-                                pd.DataFrame({'Win Loss Percent': [winLoss] * len(ma)})], axis=1)
-            winLossEma = winLossEma.append(result)
-        except Exception as e:
-            print(e)
-        count += 1
-
-        if count > 10:
-            break
-
-    winLossEma[['Symbol','Win Loss Percent']].drop_duplicates().to_excel("D:/The Fastlane Project/Coding Projects/Stock Analysis/results/win_loss.xlsx")
-
-    # ma = MATrading('ABNB', datetime.date(2020,1,2), datetime.date(2021,6,3))
-    # stockData = ma.generateMAData()
-    # up, down = getPivotPoints(stockData)
-    # print(up)
-    # pair = generateTrendLine(down, reverse=True)
+    # df = stock_utils.getAllStocks()
+    # df = df[df['Has Data']==1]
+    # df = df[df['Market Cap']> 3000000000]
     #
-    # trendLine = [(pair['Date1'].strftime("%Y-%m-%d"), pair['Pivot1']),
-    #              (pair['Date2'].strftime("%Y-%m-%d"), pair['Pivot2'])]
+    # winLossEma = pd.DataFrame(columns=['Symbol','Start Date', 'End Date', 'Entry Price', 'Shares Bought', 'Exit Price', 'PnL', 'Win or Loss', 'Win Loss Percent'])
+    #
+    # count = 0
+    #
+    # for index, row in df.iterrows():
+    #     ma = EMACrossoverTrading(row['Symbol'], datetime.date(2020, 1, 2), datetime.date(2021, 6, 23))
+    #     try:
+    #         emaData = ma.generateEMAData()
+    #         ma = ma.backTest(emaData,10000)
+    #
+    #         winLoss = len(ma[ma['Win or Loss']== 'Win'])/len(ma)
+    #         result = pd.concat([pd.DataFrame({'Symbol': [row['Symbol']] * len(ma)}), ma,
+    #                             pd.DataFrame({'Win Loss Percent': [winLoss] * len(ma)})], axis=1)
+    #         winLossEma = winLossEma.append(result)
+    #     except Exception as e:
+    #         print(e)
+    #     count += 1
+    #
+    #     if count > 10:
+    #         break
+    #
+    # winLossEma[['Symbol','Win Loss Percent']].drop_duplicates().to_excel("D:/The Fastlane Project/Coding Projects/Stock Analysis/results/win_loss.xlsx")
+
+    stock = 'NIO'
+    ma = MATrading(stock, datetime.date(2020,1,2), datetime.date(2021,6,3))
+    stockData = ma.generateMAData()
+    up, down = getPivotPoints(stockData)
+
+    dates = ma.findCloseNearMa(stockData)
+
+    print(up)
+    pair = generateTrendLine(down, reverse=True)
+
+    trendLine = [(pair['Date1'].strftime("%Y-%m-%d"), pair['Pivot1']),
+                 (pair['Date2'].strftime("%Y-%m-%d"), pair['Pivot2'])]
+    fplt.plot(
+        stockData,
+        type='candle',
+        style='charles',
+        title=stock,
+        ylabel='Price',
+        alines=trendLine,
+        mav=50
+    )
