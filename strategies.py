@@ -140,6 +140,7 @@ class MATrading:
     def generateMAData(self,stockData=None):
         df = stockData if stockData else self.generateStockDate()
         df['MA'] = df.rolling(window=self.ma)['Close'].mean()
+        df['Date'] = df.index.date
         return df
 
     def findCloseNearMa(self, df, percentDiff=0.03):
@@ -153,6 +154,36 @@ class MATrading:
         self.datesCloseToMa = df[df['Within Range'] == True].index.date.tolist()
         return self.datesCloseToMa
 
+    def findDateHighestPastPoint(self, df, date, lookBackDays=20):
+        """
+        Find highest stock point in the past x days
+        :param df:
+        :param lookBackDays:
+        :return: Date of when stock hit highest point within lookback days
+        """
+        counter = df[df['Date']==date]['index'][0]
+        if counter - lookBackDays > 0:
+            return df[counter - lookBackDays:counter].sort_values(by=['High'], ascending=False)['Date'][0]
+
+    def generateLocalTrendLine(self, df, startDate, endDate):
+        """
+        Generate a local trend line using the highest amount to the day before the stock is closest to MA
+        :param df:
+        :param startDate:
+        :param endDate:
+        :return: Treadline of stock price action
+        """
+        startCounter = df[df['Date']==startDate]['index'][0]
+        endCounter = df[df['Date'] == endDate]['index'][0] - 1
+
+        stockData = df.iloc[startCounter:endCounter]
+        up, down = getPivotPoints(stockData)
+
+        pair = generateTrendLine(down, reverse=True)
+
+        trendLine = [(pair['Date1'].strftime("%Y-%m-%d"), pair['Pivot1']),
+                     (pair['Date2'].strftime("%Y-%m-%d"), pair['Pivot2'])]
+        return trendLine
 
 class MACrossoverTrading:
     def __init__(self, ticker, startDate, endDate, ma1=50, ma2=200):
@@ -269,12 +300,13 @@ if __name__ == '__main__':
     up, down = getPivotPoints(stockData)
 
     dates = ma.findCloseNearMa(stockData)
-
-    print(up)
-    pair = generateTrendLine(down, reverse=True)
-
-    trendLine = [(pair['Date1'].strftime("%Y-%m-%d"), pair['Pivot1']),
-                 (pair['Date2'].strftime("%Y-%m-%d"), pair['Pivot2'])]
+    startDate = ma.findDateHighestPastPoint(stockData,dates[5])
+    trendLine = ma.generateLocalTrendLine(stockData, startDate, dates[5])
+    # print(up)
+    # pair = generateTrendLine(down, reverse=True)
+    #
+    # trendLine = [(pair['Date1'].strftime("%Y-%m-%d"), pair['Pivot1']),
+    #              (pair['Date2'].strftime("%Y-%m-%d"), pair['Pivot2'])]
     fplt.plot(
         stockData,
         type='candle',
