@@ -152,6 +152,29 @@ class EMACrossoverTrading:
 
         return backTestData.iloc[1:]
 
+class DipAndRip:
+    """
+    Strategy: Dip and Rip strategy involves a low float high volume premarket ticker gapping up preferably on news
+    The stock opens weak and dips, then around 9:45 - 10:15 the stock reclaims the premarket high or HOD and
+    rockets up.
+
+    Test: How often does this happen, what does it usually look like
+    """
+    def __init__(self, data):
+        self.premarket, self.regularMarket, self.afterHourMarket = stock_utils.splitCandles(data)
+
+    def getPremarketHigh(self):
+        return self.premarket.sort_values(by=['High'], ascending=False)[0]
+
+    def backTest(self, df, moneySpent=0, shareCount = 0):
+        backTestData = pd.DataFrame(
+            columns=['Trade Date', 'Start Time', 'End Time', 'Entry Price', 'Shares Bought', 'Exit Price', 'PnL', 'Win or Loss'])
+
+        tradeDate = datetime.date.today()
+        enterPrice = 0
+        enterTime = datetime.time(7,0)
+        sharesBought = 0
+
 if __name__ == '__main__':
     # stock = 'AAPL' #TODO: API Crashed, check results tomorrow (We may need to figure out a way to pull and calculate data faster
     # ma = EMACrossoverTrading('CWH', datetime.date(2020,1,2), datetime.date(2021,7,5))

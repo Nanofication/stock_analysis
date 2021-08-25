@@ -71,17 +71,10 @@ def splitCandles(data):
     :param data: Json data of candles
     :return: Premarket candles, Regular Market, After hours
     """
-    premarket = []
-    regularMarket = []
-    afterhour = []
 
-    for candle in data['candles']:
-        if candle['time'] < datetime.time(9, 30):
-            premarket.append(candle)
-        elif candle['time'] < datetime.time(16,0):
-            regularMarket.append(candle)
-        else:
-            afterhour.append(candle)
+    premarket = data[(data['Time'] < datetime.time(9,30))]
+    regularMarket = data[(data['Time'] < datetime.time(9, 30)) & (data['Time'] < datetime.time(16,0))]
+    afterhour = data[(data['Time'] > datetime.time(16,0))]
 
     return premarket, regularMarket, afterhour
 
@@ -316,8 +309,10 @@ if __name__ == '__main__':
     dateTimeStart = datetime.datetime.strptime(dateTimeStrStart, '%Y-%m-%d %H:%M')
     dateTimeEnd = datetime.datetime.strptime(dateTimeStrEnd, '%Y-%m-%d %H:%M')
 
-    print(getDailyDataTD('NIO', dateTimeStart, dateTimeEnd))
-
+    data = getDailyDataTD('NIO', dateTimeStart, dateTimeEnd)
+    print(data)
+    pre, reg, aft=splitCandles(data)
+    print(pre)
 
     ### PARALLEL PROCESSING
 
