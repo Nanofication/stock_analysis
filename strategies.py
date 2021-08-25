@@ -94,7 +94,7 @@ class EMACrossoverTrading:
         self.endDate = endDate
         self.lookback = self.ema2 if self.ema2 > self.ema1 else self.ema1
 
-    def generateStockDate(self):
+    def generateStockData(self):
         start = self.startDate - BDay(self.lookback)
         start = start.strftime('%Y-%m-%d')
         end = self.endDate.strftime('%Y-%m-%d')
@@ -102,7 +102,7 @@ class EMACrossoverTrading:
         return stock_utils.getTDData(self.ticker, start, end)
 
     def generateEMAData(self, stockData=None):
-        df = stockData if not stockData.empty else self.generateStockDate()
+        df = stockData if not stockData.empty else self.generateStockData()
         ema1 = 'EMA_{0}'.format(self.ema1)
         ema2 = 'EMA_{0}'.format(self.ema2)
         df[ema1] = df['Close'].ewm(span=self.ema1).mean()
@@ -152,7 +152,18 @@ class EMACrossoverTrading:
 
         return backTestData.iloc[1:]
 
-class DipAndRip:
+class DailyChartBase:
+
+    def __init__(self, data):
+        self.premarket, self.regularMarket, self.afterHourMarket = stock_utils.splitCandles(data)
+
+    def getPremarketHigh(self):
+        return self.premarket.sort_values(by=['High'], ascending=False).iloc[0]
+
+    def getPremarketVolume(self):
+        return self.premarket.sum(by=['High'], ascending=False).iloc[0]
+
+class DipAndRip(DailyChartBase):
     """
     Strategy: Dip and Rip strategy involves a low float high volume premarket ticker gapping up preferably on news
     The stock opens weak and dips, then around 9:45 - 10:15 the stock reclaims the premarket high or HOD and
@@ -161,10 +172,7 @@ class DipAndRip:
     Test: How often does this happen, what does it usually look like
     """
     def __init__(self, data):
-        self.premarket, self.regularMarket, self.afterHourMarket = stock_utils.splitCandles(data)
-
-    def getPremarketHigh(self):
-        return self.premarket.sort_values(by=['High'], ascending=False)[0]
+        super().__init__(data)
 
     def backTest(self, df, moneySpent=0, shareCount = 0):
         backTestData = pd.DataFrame(
@@ -175,8 +183,18 @@ class DipAndRip:
         enterTime = datetime.time(7,0)
         sharesBought = 0
 
+
 if __name__ == '__main__':
     # stock = 'AAPL' #TODO: API Crashed, check results tomorrow (We may need to figure out a way to pull and calculate data faster
+    dateTimeStrStart = '2021-8-20 9:30'
+    dateTimeStrEnd = '2021-8-20 16:00'
+    dateTimeStart = datetime.datetime.strptime(dateTimeStrStart, '%Y-%m-%d %H:%M')
+    dateTimeEnd = datetime.datetime.strptime(dateTimeStrEnd, '%Y-%m-%d %H:%M')
+
+    data = stock_utils.getDailyDataTD('NIO',dateTimeStart, dateTimeEnd)
+    dipRip = DipAndRip(data)
+    print(dipRip.getPremarketHigh())
+
     # ma = EMACrossoverTrading('CWH', datetime.date(2020,1,2), datetime.date(2021,7,5))
     # df = ma.generateEMAData()
     # print(ma.backTest(df, 10000))
@@ -208,25 +226,27 @@ if __name__ == '__main__':
     #
     # winLossEma[['Symbol','Win Loss Percent']].drop_duplicates().to_excel("D:/The Fastlane Project/Coding Projects/Stock Analysis/results/win_loss.xlsx")
 
-    stock = 'NIO'
-    ma = MATrading(stock, datetime.date(2020,1,2), datetime.date(2021,6,3))
-    stockData = ma.generateMAData()
-    up, down = stock_utils.getPivotPoints(stockData)
+    # EMA SWING TRADING TEST
 
-    dates = ma.findCloseNearMa(stockData)
-    startDate = ma.findDateHighestPastPoint(stockData,dates[10])
-    trendLine = ma.generateLocalTrendLine(stockData, startDate, dates[10])
-    # print(up)
-    # pair = generateTrendLine(down, reverse=True)
+    # stock = 'NIO'
+    # ma = MATrading(stock, datetime.date(2020,1,2), datetime.date(2021,6,3))
+    # stockData = ma.generateMAData()
+    # up, down = stock_utils.getPivotPoints(stockData)
     #
-    # trendLine = [(pair['Date1'].strftime("%Y-%m-%d"), pair['Pivot1']),
-    #              (pair['Date2'].strftime("%Y-%m-%d"), pair['Pivot2'])]
-    fplt.plot(
-        stockData,
-        type='candle',
-        style='charles',
-        title=stock,
-        ylabel='Price',
-        alines=trendLine,
-        mav=50
-    )
+    # dates = ma.findCloseNearMa(stockData)
+    # startDate = ma.findDateHighestPastPoint(stockData,dates[10])
+    # trendLine = ma.generateLocalTrendLine(stockData, startDate, dates[10])
+    # # print(up)
+    # # pair = generateTrendLine(down, reverse=True)
+    # #
+    # # trendLine = [(pair['Date1'].strftime("%Y-%m-%d"), pair['Pivot1']),
+    # #              (pair['Date2'].strftime("%Y-%m-%d"), pair['Pivot2'])]
+    # fplt.plot(
+    #     stockData,
+    #     type='candle',
+    #     style='charles',
+    #     title=stock,
+    #     ylabel='Price',
+    #     alines=trendLine,
+    #     mav=50
+    # )

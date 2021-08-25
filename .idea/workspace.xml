@@ -16,7 +16,7 @@
     <SUITE FILE_PATH="coverage/Stock Analysis$stock_utils.coverage" NAME="stock_utils Coverage Results" MODIFIED="1629858646847" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
     <SUITE FILE_PATH="coverage/Stock Analysis$generate_data.coverage" NAME="generate_data Coverage Results" MODIFIED="1627953038861" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/results" />
     <SUITE FILE_PATH="coverage/Stock Analysis$back_test.coverage" NAME="back_test Coverage Results" MODIFIED="1623968327429" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Stock Analysis$strategies.coverage" NAME="strategies Coverage Results" MODIFIED="1628907071147" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Stock Analysis$strategies.coverage" NAME="strategies Coverage Results" MODIFIED="1629932763845" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -61,8 +61,8 @@
           <file leaf-file-name="stock_utils.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/utils/stock_utils.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-3592">
-                  <caret line="76" column="52" lean-forward="false" selection-start-line="76" selection-start-column="52" selection-end-line="76" selection-end-column="52" />
+                <state relative-caret-position="473">
+                  <caret line="314" column="14" lean-forward="true" selection-start-line="314" selection-start-column="14" selection-end-line="314" selection-end-column="14" />
                   <folding>
                     <element signature="e#0#34#0" expanded="true" />
                   </folding>
@@ -109,11 +109,11 @@
           <file leaf-file-name="strategies.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/strategies.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="442">
-                  <caret line="166" column="73" lean-forward="false" selection-start-line="166" selection-start-column="73" selection-end-line="166" selection-end-column="73" />
+                <state relative-caret-position="408">
+                  <caret line="195" column="36" lean-forward="true" selection-start-line="195" selection-start-column="36" selection-end-line="195" selection-end-column="36" />
                   <folding>
                     <element signature="e#0#34#0" expanded="true" />
-                    <marker date="1629858755275" expanded="true" signature="8912:9108" ph="..." />
+                    <marker date="1629932756317" expanded="true" signature="9560:9762" ph="..." />
                   </folding>
                 </state>
               </provider>
@@ -285,7 +285,7 @@
       <recent name="D:\The Fastlane Project\Coding Projects\Stock Analysis\utils" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.stock_utils">
+  <component name="RunManager" selected="Python.strategies">
     <configuration default="false" name="stock_utils" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -599,8 +599,8 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.stock_utils" />
-        <item index="1" class="java.lang.String" itemvalue="Python.strategies" />
+        <item index="0" class="java.lang.String" itemvalue="Python.strategies" />
+        <item index="1" class="java.lang.String" itemvalue="Python.stock_utils" />
         <item index="2" class="java.lang.String" itemvalue="Python.stock_program" />
         <item index="3" class="java.lang.String" itemvalue="Python.extract_data" />
         <item index="4" class="java.lang.String" itemvalue="Python.generate_data" />
@@ -624,13 +624,13 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33315566" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.336887" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39802632" sideWeight="0.50213677" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3336945" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3336945" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -640,7 +640,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32827735" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -660,12 +660,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/strategies.py</url>
-          <line>183</line>
+          <line>201</line>
           <option name="timeStamp" value="29" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/strategies.py</url>
-          <line>194</line>
+          <line>212</line>
           <option name="timeStamp" value="43" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -710,7 +710,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/strategies.py</url>
-          <line>218</line>
+          <line>238</line>
           <option name="timeStamp" value="86" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -773,7 +773,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#34#0" expanded="true" />
-            <marker date="1629858755275" expanded="true" signature="8912:9108" ph="..." />
+            <marker date="1629932756317" expanded="true" signature="9560:9762" ph="..." />
           </folding>
         </state>
       </provider>
@@ -802,7 +802,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#34#0" expanded="true" />
-            <marker date="1629858755275" expanded="true" signature="8912:9108" ph="..." />
+            <marker date="1629932756317" expanded="true" signature="9560:9762" ph="..." />
           </folding>
         </state>
       </provider>
@@ -841,7 +841,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#34#0" expanded="true" />
-            <marker date="1629858755275" expanded="true" signature="8912:9108" ph="..." />
+            <marker date="1629932756317" expanded="true" signature="9560:9762" ph="..." />
           </folding>
         </state>
       </provider>
@@ -870,7 +870,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#34#0" expanded="true" />
-            <marker date="1629858755275" expanded="true" signature="8912:9108" ph="..." />
+            <marker date="1629932756317" expanded="true" signature="9560:9762" ph="..." />
           </folding>
         </state>
       </provider>
@@ -899,7 +899,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#34#0" expanded="true" />
-            <marker date="1629858755275" expanded="true" signature="8912:9108" ph="..." />
+            <marker date="1629932756317" expanded="true" signature="9560:9762" ph="..." />
           </folding>
         </state>
       </provider>
@@ -935,7 +935,7 @@
           <caret line="28" column="28" lean-forward="false" selection-start-line="28" selection-start-column="28" selection-end-line="28" selection-end-column="28" />
           <folding>
             <element signature="e#0#34#0" expanded="true" />
-            <marker date="1629858755275" expanded="true" signature="8912:9108" ph="..." />
+            <marker date="1629932756317" expanded="true" signature="9560:9762" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1173,8 +1173,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/utils/stock_utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3592">
-          <caret line="76" column="52" lean-forward="false" selection-start-line="76" selection-start-column="52" selection-end-line="76" selection-end-column="52" />
+        <state relative-caret-position="473">
+          <caret line="314" column="14" lean-forward="true" selection-start-line="314" selection-start-column="14" selection-end-line="314" selection-end-column="14" />
           <folding>
             <element signature="e#0#34#0" expanded="true" />
           </folding>
@@ -1183,11 +1183,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/strategies.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="166" column="73" lean-forward="false" selection-start-line="166" selection-start-column="73" selection-end-line="166" selection-end-column="73" />
+        <state relative-caret-position="408">
+          <caret line="195" column="36" lean-forward="true" selection-start-line="195" selection-start-column="36" selection-end-line="195" selection-end-column="36" />
           <folding>
             <element signature="e#0#34#0" expanded="true" />
-            <marker date="1629858755275" expanded="true" signature="8912:9108" ph="..." />
+            <marker date="1629932756317" expanded="true" signature="9560:9762" ph="..." />
           </folding>
         </state>
       </provider>
