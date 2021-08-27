@@ -58,7 +58,6 @@ def timeOffSet(time1, time2):
 
     return monthOffSet//12 + 1, monthOffSet%12 + 1, dayOffSet
 
-
 def getIntradayDataAV(symbol, asof=None):
     asofOffsetYear, asofOffsetMonth, _ = timeOffSet(datetime.date.today(), asof)
 
@@ -74,6 +73,11 @@ def getIntradayDataAV(symbol, asof=None):
     columns = [i.title() for i in ls[0]]
     data = ls[1:]
     df = pandas.DataFrame(data[::-1], columns=columns)
+
+    df['Datetime'] = pandas.to_datetime(df['Time'])
+
+    df['Date'] = pandas.to_datetime(df['Datetime']).dt.date
+    df['Time'] = pandas.to_datetime(df['Datetime']).dt.time
 
     return df
 
