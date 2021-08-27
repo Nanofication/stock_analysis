@@ -4,11 +4,12 @@ from pandas.tseries.offsets import BDay
 from finviz.screener import Screener
 from utils import math_calcs
 from dask import delayed
-from config.configuration import TD_API
+from config.configuration import TD_API, ALPHA_VANTAGE
 import pandas
 import datetime
 import numpy as np
 import requests
+import csv
 
 EPOCH = datetime.datetime.utcfromtimestamp(0)
 
@@ -45,6 +46,36 @@ def convertData(data):
     return data
 
 ###
+
+def timeOffSet(time1, time2):
+    dayOffSet = time1.day - time2.day
+    monthOffSet = 0
+
+    if dayOffSet < 0:
+        dayOffSet = abs(dayOffSet)
+        monthOffSet -= 1
+    monthOffSet += (time1.year - time2.year) * 12 + (time1.month - time2.month)
+
+    return monthOffSet//12 + 1, monthOffSet%12 + 1, dayOffSet
+
+
+def getIntradayDataAV(symbol, asof=None):
+    asofOffsetYear, asofOffsetMonth, _ = timeOffSet(datetime.date.today(), asof)
+
+    csvUrl = 'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY_EXTENDED&' \
+             'symbol={0}&interval=1min&slice=year{1}month{2}&apikey={3}'.format(symbol,asofOffsetYear, asofOffsetMonth, ALPHA_VANTAGE['API_KEY'])
+
+    with requests.Session() as s:
+        download = s.get(csvUrl)
+        decoded_content = download.content.decode('utf-8')
+        cr = csv.reader(decoded_content.splitlines(), delimiter=',')
+        ls = list(cr)
+
+    columns = [i.title() for i in ls[0]]
+    data = ls[1:]
+    df = pandas.DataFrame(data[::-1], columns=columns)
+
+    return df
 
 def getDailyDataTD(symbol, startDate, endDate):
     priceHistory = "https://api.tdameritrade.com/v1/marketdata/{symbol}/pricehistory".format(symbol=symbol)
@@ -303,6 +334,8 @@ def readStockData(symbol):
 
 if __name__ == '__main__':
     print("Getting all stocks")
+
+    getIntradayDataAV('NIO', datetime.date(2020,6,10))
 
     dateTimeStrStart = '2021-8-20 9:30'
     dateTimeStrEnd = '2021-8-20 16:00'

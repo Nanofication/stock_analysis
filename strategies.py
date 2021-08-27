@@ -154,11 +154,16 @@ class EMACrossoverTrading:
 
 class DailyChartBase:
 
-    def __init__(self, data):
+    def __init__(self, data, tradeDate, dayVolume):
         self.premarket, self.regularMarket, self.afterHourMarket = stock_utils.splitCandles(data)
+        self.tradeDate = tradeDate
+        self.dayVolume = dayVolume
 
     def getPremarketHigh(self):
         return self.premarket.sort_values(by=['High'], ascending=False).iloc[0]
+
+    def getPremarketLow(self):
+        return self.premarket.sort_values(by=['High'], ascending=True).iloc[0]
 
     def getPremarketVolume(self):
         return self.premarket.sum(by=['High'], ascending=False).iloc[0]
@@ -171,29 +176,89 @@ class DipAndRip(DailyChartBase):
 
     Test: How often does this happen, what does it usually look like
     """
-    def __init__(self, data):
-        super().__init__(data)
+    def __init__(self, data, tradeDate, dayVolume, exitTime = datetime.time(11,0)):
+        super().__init__(data, tradeDate, dayVolume)
+        self.exitTime = exitTime #This is a morning run so the absolute time to exit should be morning
 
-    def backTest(self, df, moneySpent=0, shareCount = 0):
+    def backTest(self, moneySpent=0, shareCount = 0):
+        """
+        Test Dip and Rip Strategy
+        :param moneySpent:
+        :param shareCount:
+        :return:
+        """
         backTestData = pd.DataFrame(
-            columns=['Trade Date', 'Start Time', 'End Time', 'Entry Price', 'Shares Bought', 'Exit Price', 'PnL', 'Win or Loss'])
+            columns=['Trade Date', 'Start Time', 'End Time', 'Entry Price', 'Shares Bought', 'High Price', 'High Price Time', 'PnL'])
 
-        tradeDate = datetime.date.today()
         enterPrice = 0
         enterTime = datetime.time(7,0)
+        exitPrice = 0
+        exitTime = 0
+
         sharesBought = 0
+        lowStopPrice = self.getPremarketLow() # Low Stop Level
+        highOfPattern = self.getPremarketHigh()
+        tradeEntered = False
+
+        for index, row in self.regularMarket.iterrows():
+            if row['High'] > highOfPattern:
+                if not tradeEntered:
+                    tradeEntered = True
+                    enterTime = row['Time']
+                    enterPrice = row['High']
+                    sharesBought = shareCount if shareCount else moneySpent // enterPrice
+                highOfPattern = row['High']
+                highTime = row['Time']
+
+            if row['Low'] <  lowStopPrice:
+                if tradeEntered:
+                    # Exit Trade
+                    exitPrice = row['Low']
+                    exitTime = row['Time']
+                    backTestData.append(
+                        {
+                            'Trade Date': self.tradeDate,
+                            'Start Time': enterTime,
+                            'End Time': exitTime,
+                            'Entry Price': enterPrice,
+                            'Shares Bought': sharesBought,
+                            'High Price': highOfPattern,
+                            'High Price Time': highTime,
+                            'PnL': (exitPrice - enterPrice) * sharesBought
+                        }
+                    )
+                    return backTestData
+
+                lowStopPrice = row['Low']
+
+            elif row['Time'] > self.exitTime:
+                backTestData.append(
+                    {
+                        'Trade Date': self.tradeDate,
+                        'Start Time': enterTime,
+                        'End Time': exitTime,
+                        'Entry Price': enterPrice,
+                        'Shares Bought': sharesBought,
+                        'High Price': highOfPattern,
+                        'High Price Time': highTime,
+                        'PnL': (exitPrice - enterPrice) * sharesBought
+                    }
+                )
+                return backTestData
+
 
 
 if __name__ == '__main__':
     # stock = 'AAPL' #TODO: API Crashed, check results tomorrow (We may need to figure out a way to pull and calculate data faster
-    dateTimeStrStart = '2021-8-20 9:30'
-    dateTimeStrEnd = '2021-8-20 16:00'
+    dateTimeStrStart = '2021-8-10 9:30'
+    dateTimeStrEnd = '2021-8-10 16:00'
     dateTimeStart = datetime.datetime.strptime(dateTimeStrStart, '%Y-%m-%d %H:%M')
     dateTimeEnd = datetime.datetime.strptime(dateTimeStrEnd, '%Y-%m-%d %H:%M')
 
-    data = stock_utils.getDailyDataTD('NIO',dateTimeStart, dateTimeEnd)
-    dipRip = DipAndRip(data)
-    print(dipRip.getPremarketHigh())
+    data = stock_utils.getDailyDataTD('DPW',dateTimeStart, dateTimeEnd)
+    print(data)
+    dipRip = DipAndRip(data, dateTimeStart, 10000000)
+    print(dipRip.backTest(shareCount=100))
 
     # ma = EMACrossoverTrading('CWH', datetime.date(2020,1,2), datetime.date(2021,7,5))
     # df = ma.generateEMAData()
