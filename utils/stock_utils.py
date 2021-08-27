@@ -79,6 +79,17 @@ def getIntradayDataAV(symbol, asof=None):
     df['Date'] = pandas.to_datetime(df['Datetime']).dt.date
     df['Time'] = pandas.to_datetime(df['Datetime']).dt.time
 
+    # using dictionary to convert specific columns
+    typeMap = {
+        'Open': float,
+        'High': float,
+        'Low': float,
+        'Close': float,
+        'Volume': int,
+    }
+
+    df = df.astype(typeMap)
+
     return df
 
 def getDailyDataTD(symbol, startDate, endDate):
@@ -108,7 +119,7 @@ def splitCandles(data):
     """
 
     premarket = data[(data['Time'] < datetime.time(9,30))]
-    regularMarket = data[(data['Time'] < datetime.time(9, 30)) & (data['Time'] < datetime.time(16,0))]
+    regularMarket = data[(data['Time'] > datetime.time(9, 30)) & (data['Time'] < datetime.time(16,0))]
     afterhour = data[(data['Time'] > datetime.time(16,0))]
 
     return premarket, regularMarket, afterhour

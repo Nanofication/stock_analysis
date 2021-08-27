@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a1f1e1d9-9bcf-4ced-9bb8-ced9c4207631" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/strategies.py" afterPath="$PROJECT_DIR$/strategies.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/utils/stock_utils.py" afterPath="$PROJECT_DIR$/utils/stock_utils.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -18,7 +19,7 @@
     <SUITE FILE_PATH="coverage/Stock Analysis$stock_utils.coverage" NAME="stock_utils Coverage Results" MODIFIED="1630030310486" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
     <SUITE FILE_PATH="coverage/Stock Analysis$generate_data.coverage" NAME="generate_data Coverage Results" MODIFIED="1627953038861" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/results" />
     <SUITE FILE_PATH="coverage/Stock Analysis$back_test.coverage" NAME="back_test Coverage Results" MODIFIED="1623968327429" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Stock Analysis$strategies.coverage" NAME="strategies Coverage Results" MODIFIED="1629941723172" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Stock Analysis$strategies.coverage" NAME="strategies Coverage Results" MODIFIED="1630033339303" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -63,8 +64,8 @@
           <file leaf-file-name="stock_utils.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/utils/stock_utils.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="176">
-                  <caret line="81" column="0" lean-forward="false" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
+                <state relative-caret-position="652">
+                  <caret line="121" column="40" lean-forward="false" selection-start-line="121" selection-start-column="40" selection-end-line="121" selection-end-column="40" />
                   <folding>
                     <element signature="e#0#34#0" expanded="true" />
                   </folding>
@@ -121,11 +122,11 @@
           <file leaf-file-name="strategies.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/strategies.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="825">
-                  <caret line="239" column="13" lean-forward="true" selection-start-line="239" selection-start-column="13" selection-end-line="239" selection-end-column="13" />
+                <state relative-caret-position="176">
+                  <caret line="205" column="0" lean-forward="false" selection-start-line="205" selection-start-column="0" selection-end-line="205" selection-end-column="0" />
                   <folding>
                     <element signature="e#0#34#0" expanded="true" />
-                    <marker date="1629941721818" expanded="true" signature="12174:12376" ph="..." />
+                    <marker date="1630033336098" expanded="true" signature="12391:12593" ph="..." />
                   </folding>
                 </state>
               </provider>
@@ -177,8 +178,8 @@
         <option value="$PROJECT_DIR$/results/extract_data.py" />
         <option value="$PROJECT_DIR$/stock_program.py" />
         <option value="$PROJECT_DIR$/stock_base.py" />
-        <option value="$PROJECT_DIR$/strategies.py" />
         <option value="$PROJECT_DIR$/utils/stock_utils.py" />
+        <option value="$PROJECT_DIR$/strategies.py" />
       </list>
     </option>
   </component>
@@ -297,7 +298,7 @@
       <recent name="D:\The Fastlane Project\Coding Projects\Stock Analysis\utils" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.stock_utils">
+  <component name="RunManager" selected="Python.strategies">
     <configuration default="false" name="stock_utils" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -611,8 +612,8 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.stock_utils" />
-        <item index="1" class="java.lang.String" itemvalue="Python.strategies" />
+        <item index="0" class="java.lang.String" itemvalue="Python.strategies" />
+        <item index="1" class="java.lang.String" itemvalue="Python.stock_utils" />
         <item index="2" class="java.lang.String" itemvalue="Python.stock_program" />
         <item index="3" class="java.lang.String" itemvalue="Python.extract_data" />
         <item index="4" class="java.lang.String" itemvalue="Python.generate_data" />
@@ -646,7 +647,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39761648" sideWeight="0.49786323" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39761648" sideWeight="0.49786323" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -672,12 +673,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/strategies.py</url>
-          <line>266</line>
+          <line>268</line>
           <option name="timeStamp" value="29" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/strategies.py</url>
-          <line>277</line>
+          <line>279</line>
           <option name="timeStamp" value="43" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -722,7 +723,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/strategies.py</url>
-          <line>303</line>
+          <line>305</line>
           <option name="timeStamp" value="86" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -742,30 +743,46 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/utils/stock_utils.py</url>
-          <line>348</line>
+          <line>359</line>
           <option name="timeStamp" value="99" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/utils/stock_utils.py</url>
-          <line>343</line>
+          <line>354</line>
           <option name="timeStamp" value="103" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/utils/stock_utils.py</url>
-          <line>341</line>
+          <line>352</line>
           <option name="timeStamp" value="106" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/utils/stock_utils.py</url>
-          <line>81</line>
-          <option name="timeStamp" value="111" />
+          <url>file://$PROJECT_DIR$/strategies.py</url>
+          <line>261</line>
+          <option name="timeStamp" value="113" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/strategies.py</url>
+          <line>205</line>
+          <option name="timeStamp" value="115" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="112" />
+      <option name="time" value="117" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/strategies.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#34#0" expanded="true" />
+            <marker date="1630033336098" expanded="true" signature="12391:12593" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/utils/math_calcs.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -790,36 +807,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#34#0" expanded="true" />
-            <marker date="1629941721818" expanded="true" signature="12174:12376" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils/math_calcs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="4" lean-forward="false" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/stock_program.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1802">
-          <caret line="106" column="4" lean-forward="false" selection-start-line="106" selection-start-column="4" selection-end-line="107" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#34#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/strategies.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#34#0" expanded="true" />
-            <marker date="1629941721818" expanded="true" signature="12174:12376" ph="..." />
+            <marker date="1630033336098" expanded="true" signature="12391:12593" ph="..." />
           </folding>
         </state>
       </provider>
@@ -858,7 +846,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#34#0" expanded="true" />
-            <marker date="1629941721818" expanded="true" signature="12174:12376" ph="..." />
+            <marker date="1630033336098" expanded="true" signature="12391:12593" ph="..." />
           </folding>
         </state>
       </provider>
@@ -887,7 +875,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#34#0" expanded="true" />
-            <marker date="1629941721818" expanded="true" signature="12174:12376" ph="..." />
+            <marker date="1630033336098" expanded="true" signature="12391:12593" ph="..." />
           </folding>
         </state>
       </provider>
@@ -916,7 +904,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#34#0" expanded="true" />
-            <marker date="1629941721818" expanded="true" signature="12174:12376" ph="..." />
+            <marker date="1630033336098" expanded="true" signature="12391:12593" ph="..." />
           </folding>
         </state>
       </provider>
@@ -952,7 +940,7 @@
           <caret line="28" column="28" lean-forward="false" selection-start-line="28" selection-start-column="28" selection-end-line="28" selection-end-column="28" />
           <folding>
             <element signature="e#0#34#0" expanded="true" />
-            <marker date="1629941721818" expanded="true" signature="12174:12376" ph="..." />
+            <marker date="1630033336098" expanded="true" signature="12391:12593" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1189,17 +1177,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/strategies.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="825">
-          <caret line="239" column="13" lean-forward="true" selection-start-line="239" selection-start-column="13" selection-end-line="239" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#34#0" expanded="true" />
-            <marker date="1629941721818" expanded="true" signature="12174:12376" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python38/Lib/site-packages/pandas/core/generic.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="176">
@@ -1208,12 +1185,39 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python38/Lib/site-packages/pandas/core/dtypes/common.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="1779" column="17" lean-forward="false" selection-start-line="1779" selection-start-column="17" selection-end-line="1779" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/utils/stock_utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="81" column="0" lean-forward="false" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
+        <state relative-caret-position="652">
+          <caret line="121" column="40" lean-forward="false" selection-start-line="121" selection-start-column="40" selection-end-line="121" selection-end-column="40" />
           <folding>
             <element signature="e#0#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python38/Lib/site-packages/pandas/core/frame.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="431">
+          <caret line="7705" column="0" lean-forward="false" selection-start-line="7705" selection-start-column="0" selection-end-line="7705" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/strategies.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="205" column="0" lean-forward="false" selection-start-line="205" selection-start-column="0" selection-end-line="205" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#34#0" expanded="true" />
+            <marker date="1630033336098" expanded="true" signature="12391:12593" ph="..." />
           </folding>
         </state>
       </provider>

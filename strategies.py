@@ -160,10 +160,10 @@ class DailyChartBase:
         self.dayVolume = dayVolume
 
     def getPremarketHigh(self):
-        return self.premarket.sort_values(by=['High'], ascending=False).iloc[0]
+        return self.premarket.sort_values(by=['High'], ascending=False).iloc[0]['High']
 
     def getPremarketLow(self):
-        return self.premarket.sort_values(by=['High'], ascending=True).iloc[0]
+        return self.premarket.sort_values(by=['Low'], ascending=True).iloc[0]['Low']
 
     def getPremarketVolume(self):
         return self.premarket.sum(by=['High'], ascending=False).iloc[0]
@@ -215,7 +215,7 @@ class DipAndRip(DailyChartBase):
                     # Exit Trade
                     exitPrice = row['Low']
                     exitTime = row['Time']
-                    backTestData.append(
+                    backTestData = backTestData.append(
                         {
                             'Trade Date': self.tradeDate,
                             'Start Time': enterTime,
@@ -225,14 +225,14 @@ class DipAndRip(DailyChartBase):
                             'High Price': highOfPattern,
                             'High Price Time': highTime,
                             'PnL': (exitPrice - enterPrice) * sharesBought
-                        }
+                        }, ignore_index=True
                     )
                     return backTestData
 
                 lowStopPrice = row['Low']
 
             elif row['Time'] > self.exitTime:
-                backTestData.append(
+                backTestData = backTestData.append(
                     {
                         'Trade Date': self.tradeDate,
                         'Start Time': enterTime,
@@ -242,7 +242,7 @@ class DipAndRip(DailyChartBase):
                         'High Price': highOfPattern,
                         'High Price Time': highTime,
                         'PnL': (exitPrice - enterPrice) * sharesBought
-                    }
+                    }, ignore_index=True
                 )
                 return backTestData
 
@@ -251,13 +251,15 @@ class DipAndRip(DailyChartBase):
 if __name__ == '__main__':
     # stock = 'AAPL' #TODO: API Crashed, check results tomorrow (We may need to figure out a way to pull and calculate data faster
     dateTimeStrStart = '2021-8-10 9:30'
-    dateTimeStrEnd = '2021-8-10 16:00'
+    # dateTimeStrEnd = '2021-8-10 16:00'
     dateTimeStart = datetime.datetime.strptime(dateTimeStrStart, '%Y-%m-%d %H:%M')
-    dateTimeEnd = datetime.datetime.strptime(dateTimeStrEnd, '%Y-%m-%d %H:%M')
-
-    data = stock_utils.getDailyDataTD('DPW',dateTimeStart, dateTimeEnd)
-    print(data)
-    dipRip = DipAndRip(data, dateTimeStart, 10000000)
+    # dateTimeEnd = datetime.datetime.strptime(dateTimeStrEnd, '%Y-%m-%d %H:%M')
+    #
+    # data = stock_utils.getDailyDataTD('DPW',dateTimeStart, dateTimeEnd)
+    # print(data)
+    df = stock_utils.getIntradayDataAV('DPW', datetime.date(2020, 6, 10))
+    df = df[df['Date']==datetime.date(2020,6,10)]
+    dipRip = DipAndRip(df, dateTimeStart, 10000000)
     print(dipRip.backTest(shareCount=100))
 
     # ma = EMACrossoverTrading('CWH', datetime.date(2020,1,2), datetime.date(2021,7,5))
