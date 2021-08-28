@@ -192,8 +192,6 @@ class DipAndRip(DailyChartBase):
 
         enterPrice = 0
         enterTime = datetime.time(7,0)
-        exitPrice = 0
-        exitTime = 0
 
         sharesBought = 0
         lowStopPrice = self.getPremarketLow() # Low Stop Level
@@ -213,18 +211,19 @@ class DipAndRip(DailyChartBase):
             if row['Low'] <  lowStopPrice:
                 if tradeEntered:
                     # Exit Trade
-                    exitPrice = row['Low']
-                    exitTime = row['Time']
+                    self.exitTime = row['Time']
                     backTestData = backTestData.append(
                         {
                             'Trade Date': self.tradeDate,
                             'Start Time': enterTime,
-                            'End Time': exitTime,
+                            'End Time': self.exitTime,
                             'Entry Price': enterPrice,
                             'Shares Bought': sharesBought,
                             'High Price': highOfPattern,
                             'High Price Time': highTime,
-                            'PnL': (exitPrice - enterPrice) * sharesBought
+                            'Time To Reach High Price': datetime.datetime.combine(self.tradeDate, highTime) - datetime.datetime.combine(self.tradeDate, enterTime),
+                            'PnL': (highOfPattern - enterPrice) * sharesBought,
+                            'Time Elapsed Till Exit': datetime.datetime.combine(self.tradeDate, self.exitTime) - datetime.datetime.combine(self.tradeDate, enterTime)
                         }, ignore_index=True
                     )
                     return backTestData
@@ -236,12 +235,16 @@ class DipAndRip(DailyChartBase):
                     {
                         'Trade Date': self.tradeDate,
                         'Start Time': enterTime,
-                        'End Time': exitTime,
+                        'End Time': self.exitTime,
                         'Entry Price': enterPrice,
                         'Shares Bought': sharesBought,
                         'High Price': highOfPattern,
                         'High Price Time': highTime,
-                        'PnL': (exitPrice - enterPrice) * sharesBought
+                        'Time To Reach High Price': datetime.datetime.combine(self.tradeDate.date(), highTime) -
+                                                    datetime.datetime.combine(self.tradeDate.date(), enterTime),
+                        'PnL': (highOfPattern - enterPrice) * sharesBought,
+                        'Time Elapsed Till Exit': datetime.datetime.combine(self.tradeDate.date(), self.exitTime) -
+                                     datetime.datetime.combine(self.tradeDate.date(), enterTime)
                     }, ignore_index=True
                 )
                 return backTestData
