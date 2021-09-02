@@ -1,7 +1,7 @@
 from pandas_datareader import data
 from pandas_datareader._utils import RemoteDataError
 from pandas.tseries.offsets import BDay
-from finviz.screener import Screener
+from finvizfinance.screener.custom import Custom
 from utils import math_calcs
 from dask import delayed
 from config.configuration import TD_API, ALPHA_VANTAGE
@@ -335,8 +335,14 @@ def getStockList(storeExcel=False, path=None):
     :param path: location to store excel file
     :return:
     """
-    stockList = Screener()
-    stockList = pandas.DataFrame(stockList)
+    import time
+
+    start = time.time()
+    stockList = Custom().ScreenerView(columns=[0,1,2,3,4,5,6,7,8,25,30,65,66,67])
+    end = time.time()
+
+    print('Took {0} Min and {1} Seconds to Query'.format((end - start)//60, (end-start)%60))
+
     if storeExcel:
         stockList.to_excel(path)
 
@@ -350,17 +356,19 @@ def readStockData(symbol):
 if __name__ == '__main__':
     print("Getting all stocks")
 
-    getIntradayDataAV('NIO', datetime.date(2020,6,10))
+    getStockList(True,'D:\The Fastlane Project\Coding Projects\Stock Analysis\stocks\stock_data_3.xlsx')
 
-    dateTimeStrStart = '2021-8-20 9:30'
-    dateTimeStrEnd = '2021-8-20 16:00'
-    dateTimeStart = datetime.datetime.strptime(dateTimeStrStart, '%Y-%m-%d %H:%M')
-    dateTimeEnd = datetime.datetime.strptime(dateTimeStrEnd, '%Y-%m-%d %H:%M')
-
-    data = getDailyDataTD('NIO', dateTimeStart, dateTimeEnd)
-    print(data)
-    pre, reg, aft=splitCandles(data)
-    print(pre)
+    # getIntradayDataAV('NIO', datetime.date(2020,6,10))
+    #
+    # dateTimeStrStart = '2021-8-20 9:30'
+    # dateTimeStrEnd = '2021-8-20 16:00'
+    # dateTimeStart = datetime.datetime.strptime(dateTimeStrStart, '%Y-%m-%d %H:%M')
+    # dateTimeEnd = datetime.datetime.strptime(dateTimeStrEnd, '%Y-%m-%d %H:%M')
+    #
+    # data = getDailyDataTD('NIO', dateTimeStart, dateTimeEnd)
+    # print(data)
+    # pre, reg, aft=splitCandles(data)
+    # print(pre)
 
     ### PARALLEL PROCESSING
 

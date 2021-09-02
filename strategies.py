@@ -188,7 +188,7 @@ class DipAndRip(DailyChartBase):
         :return:
         """
         backTestData = pd.DataFrame(
-            columns=['Trade Date', 'Start Time', 'End Time', 'Entry Price', 'Shares Bought', 'High Price', 'High Price Time', 'PnL'])
+            columns=['Trade Date', 'Start Time', 'End Time', 'Entry Price', 'Shares Bought', 'High Price', 'High Price Time'])
 
         enterPrice = 0
         enterTime = datetime.time(7,0)
@@ -219,10 +219,12 @@ class DipAndRip(DailyChartBase):
                             'End Time': self.exitTime,
                             'Entry Price': enterPrice,
                             'Shares Bought': sharesBought,
+                            'Stop Loss': lowStopPrice,
                             'High Price': highOfPattern,
                             'High Price Time': highTime,
                             'Time To Reach High Price': datetime.datetime.combine(self.tradeDate, highTime) - datetime.datetime.combine(self.tradeDate, enterTime),
-                            'PnL': (highOfPattern - enterPrice) * sharesBought,
+                            'Max Profit': (highOfPattern - enterPrice) * sharesBought,
+                            'Max Loss': (lowStopPrice - enterPrice) * sharesBought,
                             'Time Elapsed Till Exit': datetime.datetime.combine(self.tradeDate, self.exitTime) - datetime.datetime.combine(self.tradeDate, enterTime)
                         }, ignore_index=True
                     )
@@ -233,18 +235,18 @@ class DipAndRip(DailyChartBase):
             elif row['Time'] > self.exitTime:
                 backTestData = backTestData.append(
                     {
-                        'Trade Date': self.tradeDate,
-                        'Start Time': enterTime,
-                        'End Time': self.exitTime,
-                        'Entry Price': enterPrice,
-                        'Shares Bought': sharesBought,
-                        'High Price': highOfPattern,
-                        'High Price Time': highTime,
-                        'Time To Reach High Price': datetime.datetime.combine(self.tradeDate.date(), highTime) -
-                                                    datetime.datetime.combine(self.tradeDate.date(), enterTime),
-                        'PnL': (highOfPattern - enterPrice) * sharesBought,
-                        'Time Elapsed Till Exit': datetime.datetime.combine(self.tradeDate.date(), self.exitTime) -
-                                     datetime.datetime.combine(self.tradeDate.date(), enterTime)
+                            'Trade Date': self.tradeDate,
+                            'Start Time': enterTime,
+                            'End Time': self.exitTime,
+                            'Entry Price': enterPrice,
+                            'Shares Bought': sharesBought,
+                            'Stop Loss': lowStopPrice,
+                            'High Price': highOfPattern,
+                            'High Price Time': highTime,
+                            'Time To Reach High Price': datetime.datetime.combine(self.tradeDate, highTime) - datetime.datetime.combine(self.tradeDate, enterTime),
+                            'Max Profit': (highOfPattern - enterPrice) * sharesBought,
+                            'Max Loss': (lowStopPrice - enterPrice) * sharesBought,
+                            'Time Elapsed Till Exit': datetime.datetime.combine(self.tradeDate, self.exitTime) - datetime.datetime.combine(self.tradeDate, enterTime)
                     }, ignore_index=True
                 )
                 return backTestData
@@ -259,9 +261,9 @@ if __name__ == '__main__':
     # dateTimeEnd = datetime.datetime.strptime(dateTimeStrEnd, '%Y-%m-%d %H:%M')
     #
     # data = stock_utils.getDailyDataTD('DPW',dateTimeStart, dateTimeEnd)
-    # print(data)
-    df = stock_utils.getIntradayDataAV('DPW', datetime.date(2020, 6, 10))
-    df = df[df['Date']==datetime.date(2020,6,10)]
+    # print(data) 6/10/2020 DPW
+    df = stock_utils.getIntradayDataAV('NURO', datetime.date(2021, 8, 27))
+    df = df[df['Date']==datetime.date(2021,8,27)]
     dipRip = DipAndRip(df, dateTimeStart, 10000000)
     print(dipRip.backTest(shareCount=100))
 
