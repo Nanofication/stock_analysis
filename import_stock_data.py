@@ -25,8 +25,9 @@ def findPotentialDipAndRipTrades(stockData):
         tickerData = tickerData[tickerData['Volume'] > 1000000]
         tickerData = tickerData.sort_values('Volume', ascending=False)
 
-        # stockDatesMap[t] = dates
-        print(t)
+        stockDatesMap[t] = tickerData['Date'].to_list()
+
+    return stockDatesMap
 
 if __name__ == '__main__':
     data = pd.read_excel('D:\The Fastlane Project\Coding Projects\Stock Analysis\stocks\stock_data_3.xlsx')
