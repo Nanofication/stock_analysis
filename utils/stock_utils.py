@@ -53,7 +53,7 @@ def timeOffSet(time1, time2):
 
     if dayOffSet < 0:
         dayOffSet = abs(dayOffSet)
-        monthOffSet -= 1
+        # monthOffSet -= 1
     monthOffSet += (time1.year - time2.year) * 12 + (time1.month - time2.month)
 
     return monthOffSet//12 + 1, monthOffSet%12 + 1, dayOffSet
@@ -356,9 +356,10 @@ def readStockData(symbol):
 if __name__ == '__main__':
     print("Getting all stocks")
 
-    getStockList(True,'D:\The Fastlane Project\Coding Projects\Stock Analysis\stocks\stock_data_3.xlsx')
+    # getStockList(True,'D:\The Fastlane Project\Coding Projects\Stock Analysis\stocks\stock_data_3.xlsx')
 
-    # getIntradayDataAV('NIO', datetime.date(2020,6,10))
+    x = getIntradayDataAV('DPW', datetime.date(2020,6,1))
+    print(x[x['Date'] == datetime.date(2020,6,10)])
     #
     # dateTimeStrStart = '2021-8-20 9:30'
     # dateTimeStrEnd = '2021-8-20 16:00'

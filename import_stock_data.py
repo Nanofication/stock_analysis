@@ -21,11 +21,16 @@ def findPotentialDipAndRipTrades(stockData):
     tickers = df['Ticker'].to_list()
 
     for t in tickers:
-        tickerData = stock_utils.getYearlyDataTD(t,dateTimeStart, dateTimeEnd)
-        tickerData = tickerData[tickerData['Volume'] > 1000000]
-        tickerData = tickerData.sort_values('Volume', ascending=False)
+        try:
+            print("Fetching data for {0}".format(t))
+            tickerData = stock_utils.getYearlyDataTD(t,dateTimeStart, dateTimeEnd)
+            tickerData = tickerData[tickerData['Volume'] > 1000000]
+            tickerData = tickerData.sort_values('Volume', ascending=False)
 
-        stockDatesMap[t] = tickerData['Date'].to_list()
+            stockDatesMap[t] = tickerData['Date'].to_list()
+        except Exception as e:
+            print("Something went wrong for {0}".format(t))
+            print(e)
 
     return stockDatesMap
 
