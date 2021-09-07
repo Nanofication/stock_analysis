@@ -53,7 +53,7 @@ def timeOffSet(time1, time2):
 
     if dayOffSet < 0:
         dayOffSet = abs(dayOffSet)
-        # monthOffSet -= 1
+        monthOffSet -= 1
     monthOffSet += (time1.year - time2.year) * 12 + (time1.month - time2.month)
 
     return monthOffSet//12 + 1, monthOffSet%12 + 1, dayOffSet
