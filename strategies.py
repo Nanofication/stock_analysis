@@ -3,9 +3,54 @@ from pandas_datareader._utils import RemoteDataError
 from pandas.tseries.offsets import BDay
 from utils import stock_utils
 import pandas as pd
+from os import listdir
+from os.path import isfile, join
 import numpy as np
 import datetime
 import mplfinance as fplt
+
+def backTestDipAndRip(rootPath='D:/The Fastlane Project/Coding Projects/Stock Analysis/results/intraday_data/'):
+    """
+    Backtest Dip and Rip on all intraday charts
+    :return:
+    """
+    intradayData = [f for f in listdir(rootPath)]
+
+    for dataPath in intradayData:
+        file = dataPath.split('/')[-1]
+        ticker = file.split('_')[0]
+        date = file.split('_')[1]
+        date = datetime.datetime.strptime(date.split('.')[0], '%Y-%m-%d').date()
+
+        df = pd.read_excel(join(rootPath, dataPath))
+        df = readIntradayDataAV(df)
+
+        dipRip = DipAndRip(df, date, 10000000)
+        print("Ticker: {0}".format(ticker))
+        print(dipRip.backTest(shareCount=100).to_string())
+
+
+def readIntradayDataAV(df):
+    """
+    Read and convert AV intraday data
+    :return:
+    """
+    df['Datetime'] = pd.to_datetime(df['Time'])
+
+    df['Date'] = pd.to_datetime(df['Datetime']).dt.date
+    df['Time'] = pd.to_datetime(df['Datetime']).dt.time
+
+    typeMap = {
+        'Open': float,
+        'High': float,
+        'Low': float,
+        'Close': float,
+        'Volume': int,
+    }
+
+    df = df.astype(typeMap)
+
+    return df
 
 class MATrading:
     """
@@ -162,8 +207,14 @@ class DailyChartBase:
     def getPremarketHigh(self):
         return self.premarket.sort_values(by=['High'], ascending=False).iloc[0]['High']
 
+    def getPremarketHighTime(self):
+        return self.premarket.sort_values(by=['High'], ascending=False).iloc[0]['Time']
+
     def getPremarketLow(self):
         return self.premarket.sort_values(by=['Low'], ascending=True).iloc[0]['Low']
+
+    def getPremarketLowTime(self):
+        return self.premarket.sort_values(by=['Low'], ascending=True).iloc[0]['Time']
 
     def getPremarketVolume(self):
         return self.premarket.sum(by=['High'], ascending=False).iloc[0]
@@ -196,6 +247,7 @@ class DipAndRip(DailyChartBase):
         sharesBought = 0
         lowStopPrice = self.getPremarketLow() # Low Stop Level
         highOfPattern = self.getPremarketHigh()
+        highTime = self.getPremarketHighTime()
         tradeEntered = False
 
         for index, row in self.regularMarket.iterrows():
@@ -255,17 +307,19 @@ class DipAndRip(DailyChartBase):
 
 if __name__ == '__main__':
     # stock = 'AAPL' #TODO: API Crashed, check results tomorrow (We may need to figure out a way to pull and calculate data faster
-    dateTimeStrStart = '2021-8-10 9:30'
+    backTestDipAndRip()
+    dateTimeStrStart = '2021-2-5 4:00'
     # dateTimeStrEnd = '2021-8-10 16:00'
     dateTimeStart = datetime.datetime.strptime(dateTimeStrStart, '%Y-%m-%d %H:%M')
     # dateTimeEnd = datetime.datetime.strptime(dateTimeStrEnd, '%Y-%m-%d %H:%M')
     #
     # data = stock_utils.getDailyDataTD('DPW',dateTimeStart, dateTimeEnd)
     # print(data) 6/10/2020 DPW
-    df = stock_utils.getIntradayDataAV('NURO', datetime.date(2021, 8, 27))
-    df = df[df['Date']==datetime.date(2021,8,27)]
-    dipRip = DipAndRip(df, dateTimeStart, 10000000)
-    print(dipRip.backTest(shareCount=100))
+    # df = pd.read_excel('D:/The Fastlane Project/Coding Projects/Stock Analysis/results/intraday_data/AACG_2021-02-11.xlsx')
+    # df = readIntradayDataAV(df)
+    # # df = df[df['Date']==datetime.date(2021,8,27)]
+    # dipRip = DipAndRip(df, dateTimeStart, 10000000)
+    # print(dipRip.backTest(shareCount=100))
 
     # ma = EMACrossoverTrading('CWH', datetime.date(2020,1,2), datetime.date(2021,7,5))
     # df = ma.generateEMAData()
