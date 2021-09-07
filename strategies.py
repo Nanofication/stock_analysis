@@ -26,8 +26,11 @@ def backTestDipAndRip(rootPath='D:/The Fastlane Project/Coding Projects/Stock An
         df = readIntradayDataAV(df)
 
         dipRip = DipAndRip(df, date, 10000000)
-        print("Ticker: {0}".format(ticker))
-        print(dipRip.backTest(shareCount=100).to_string())
+        try:
+            print("Ticker: {0}".format(ticker))
+            print(dipRip.backTest(shareCount=100).to_string())
+        except Exception as e:
+            print(e)
 
 
 def readIntradayDataAV(df):

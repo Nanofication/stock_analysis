@@ -18,9 +18,9 @@
     <SUITE FILE_PATH="coverage/Stock Analysis$extract_data.coverage" NAME="extract_data Coverage Results" MODIFIED="1627956868179" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/results" />
     <SUITE FILE_PATH="coverage/Stock Analysis$import_stock_data.coverage" NAME="import_stock_data Coverage Results" MODIFIED="1630973073157" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Stock Analysis$stock_utils.coverage" NAME="stock_utils Coverage Results" MODIFIED="1630933488469" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
-    <SUITE FILE_PATH="coverage/Stock Analysis$generate_data.coverage" NAME="generate_data Coverage Results" MODIFIED="1630976608008" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/results" />
+    <SUITE FILE_PATH="coverage/Stock Analysis$generate_data.coverage" NAME="generate_data Coverage Results" MODIFIED="1631033209000" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/results" />
     <SUITE FILE_PATH="coverage/Stock Analysis$back_test.coverage" NAME="back_test Coverage Results" MODIFIED="1623968327429" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Stock Analysis$strategies.coverage" NAME="strategies Coverage Results" MODIFIED="1630982610550" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Stock Analysis$strategies.coverage" NAME="strategies Coverage Results" MODIFIED="1631045833638" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -65,8 +65,8 @@
           <file leaf-file-name="stock_utils.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/utils/stock_utils.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="42">
-                  <caret line="120" column="0" lean-forward="false" selection-start-line="120" selection-start-column="0" selection-end-line="120" selection-end-column="0" />
+                <state relative-caret-position="123">
+                  <caret line="76" column="0" lean-forward="false" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
                   <folding>
                     <element signature="e#0#34#0" expanded="true" />
                   </folding>
@@ -77,7 +77,7 @@
           <file leaf-file-name="managers.py" pinned="false" current-in-tab="false">
             <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python38/Lib/site-packages/pandas/core/internals/managers.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="17">
+                <state relative-caret-position="27642">
                   <caret line="1687" column="0" lean-forward="false" selection-start-line="1687" selection-start-column="0" selection-end-line="1687" selection-end-column="0" />
                   <folding />
                 </state>
@@ -87,7 +87,7 @@
           <file leaf-file-name="_base.py" pinned="false" current-in-tab="false">
             <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python38/Lib/site-packages/pandas/io/excel/_base.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="176">
+                <state relative-caret-position="10285">
                   <caret line="636" column="0" lean-forward="false" selection-start-line="636" selection-start-column="0" selection-end-line="636" selection-end-column="0" />
                   <folding />
                 </state>
@@ -111,8 +111,8 @@
           <file leaf-file-name="generate_data.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/results/generate_data.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-266">
-                  <caret line="110" column="0" lean-forward="true" selection-start-line="110" selection-start-column="0" selection-end-line="110" selection-end-column="0" />
+                <state relative-caret-position="1755">
+                  <caret line="151" column="75" lean-forward="false" selection-start-line="151" selection-start-column="75" selection-end-line="151" selection-end-column="75" />
                   <folding>
                     <element signature="e#0#41#0" expanded="true" />
                   </folding>
@@ -123,8 +123,8 @@
           <file leaf-file-name="import_stock_data.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/import_stock_data.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="94">
-                  <caret line="31" column="76" lean-forward="true" selection-start-line="31" selection-start-column="20" selection-end-line="31" selection-end-column="76" />
+                <state relative-caret-position="402">
+                  <caret line="31" column="76" lean-forward="false" selection-start-line="31" selection-start-column="20" selection-end-line="31" selection-end-column="76" />
                   <folding>
                     <element signature="e#0#29#0" expanded="true" />
                   </folding>
@@ -135,11 +135,11 @@
           <file leaf-file-name="strategies.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/strategies.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="110">
-                  <caret line="16" column="48" lean-forward="false" selection-start-line="16" selection-start-column="48" selection-end-line="16" selection-end-column="48" />
+                <state relative-caret-position="402">
+                  <caret line="265" column="41" lean-forward="false" selection-start-line="265" selection-start-column="29" selection-end-line="265" selection-end-column="41" />
                   <folding>
                     <element signature="e#0#34#0" expanded="true" />
-                    <marker date="1630982608113" expanded="true" signature="14935:15137" ph="..." />
+                    <marker date="1631045707521" expanded="true" signature="15008:15210" ph="..." />
                   </folding>
                 </state>
               </provider>
@@ -148,7 +148,7 @@
           <file leaf-file-name="extract_data.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/results/extract_data.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="255">
+                <state relative-caret-position="816">
                   <caret line="48" column="20" lean-forward="false" selection-start-line="48" selection-start-column="20" selection-end-line="48" selection-end-column="39" />
                   <folding>
                     <element signature="e#0#19#0" expanded="true" />
@@ -195,8 +195,8 @@
         <option value="$PROJECT_DIR$/stock_program.py" />
         <option value="$PROJECT_DIR$/stock_base.py" />
         <option value="$PROJECT_DIR$/import_stock_data.py" />
-        <option value="$PROJECT_DIR$/results/generate_data.py" />
         <option value="$PROJECT_DIR$/utils/stock_utils.py" />
+        <option value="$PROJECT_DIR$/results/generate_data.py" />
         <option value="$PROJECT_DIR$/strategies.py" />
       </list>
     </option>
@@ -281,6 +281,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="results" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Stock Analysis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Stock Analysis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="results" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="stock_high_volume_data" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -670,26 +688,26 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="0" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3795309" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20415778" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39802632" sideWeight="0.50213677" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32827735" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32827735" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32827735" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3336945" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3336945" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39653304" sideWeight="0.49786323" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3960396" sideWeight="0.49786323" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32827735" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -709,7 +727,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/strategies.py</url>
-          <line>338</line>
+          <line>341</line>
           <option name="timeStamp" value="43" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -724,22 +742,22 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/strategies.py</url>
-          <line>364</line>
+          <line>367</line>
           <option name="timeStamp" value="86" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/strategies.py</url>
-          <line>100</line>
+          <line>103</line>
           <option name="timeStamp" value="94" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/strategies.py</url>
-          <line>117</line>
+          <line>120</line>
           <option name="timeStamp" value="95" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/strategies.py</url>
-          <line>115</line>
+          <line>118</line>
           <option name="timeStamp" value="96" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -754,17 +772,17 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/strategies.py</url>
-          <line>303</line>
+          <line>306</line>
           <option name="timeStamp" value="118" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/strategies.py</url>
-          <line>213</line>
+          <line>216</line>
           <option name="timeStamp" value="120" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/results/generate_data.py</url>
-          <line>152</line>
+          <line>155</line>
           <option name="timeStamp" value="137" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -787,8 +805,18 @@
           <line>24</line>
           <option name="timeStamp" value="149" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/results/generate_data.py</url>
+          <line>131</line>
+          <option name="timeStamp" value="150" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/utils/stock_utils.py</url>
+          <line>76</line>
+          <option name="timeStamp" value="151" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="150" />
+      <option name="time" value="152" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -809,7 +837,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#34#0" expanded="true" />
-            <marker date="1630982608113" expanded="true" signature="14935:15137" ph="..." />
+            <marker date="1631045707521" expanded="true" signature="15008:15210" ph="..." />
           </folding>
         </state>
       </provider>
@@ -838,7 +866,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#34#0" expanded="true" />
-            <marker date="1630982608113" expanded="true" signature="14935:15137" ph="..." />
+            <marker date="1631045707521" expanded="true" signature="15008:15210" ph="..." />
           </folding>
         </state>
       </provider>
@@ -867,7 +895,7 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#34#0" expanded="true" />
-            <marker date="1630982608113" expanded="true" signature="14935:15137" ph="..." />
+            <marker date="1631045707521" expanded="true" signature="15008:15210" ph="..." />
           </folding>
         </state>
       </provider>
@@ -903,7 +931,7 @@
           <caret line="28" column="28" lean-forward="false" selection-start-line="28" selection-start-column="28" selection-end-line="28" selection-end-column="28" />
           <folding>
             <element signature="e#0#34#0" expanded="true" />
-            <marker date="1630982608113" expanded="true" signature="14935:15137" ph="..." />
+            <marker date="1631045707521" expanded="true" signature="15008:15210" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1096,14 +1124,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/math_calcs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="4" lean-forward="false" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python38/Lib/site-packages/pandas/core/indexing.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="23851">
@@ -1112,27 +1132,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python38/Lib/site-packages/pandas/core/internals/managers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1687" column="0" lean-forward="false" selection-start-line="1687" selection-start-column="0" selection-end-line="1687" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python38/Lib/site-packages/pandas/io/excel/_base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="636" column="0" lean-forward="false" selection-start-line="636" selection-start-column="0" selection-end-line="636" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python38/Lib/codecs.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="309" column="0" lean-forward="false" selection-start-line="309" selection-start-column="0" selection-end-line="309" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1144,21 +1147,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/results/extract_data.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="48" column="20" lean-forward="false" selection-start-line="48" selection-start-column="20" selection-end-line="48" selection-end-column="39" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python38/Lib/site-packages/xlrd/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="127" column="31" lean-forward="false" selection-start-line="127" selection-start-column="31" selection-end-line="127" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1174,7 +1166,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="176">
           <caret line="348" column="0" lean-forward="false" selection-start-line="348" selection-start-column="0" selection-end-line="348" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1182,7 +1173,40 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="176">
           <caret line="321" column="0" lean-forward="false" selection-start-line="321" selection-start-column="0" selection-end-line="321" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python38/Lib/site-packages/pandas/core/internals/managers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="27642">
+          <caret line="1687" column="0" lean-forward="false" selection-start-line="1687" selection-start-column="0" selection-end-line="1687" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python38/Lib/site-packages/pandas/io/excel/_base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="10285">
+          <caret line="636" column="0" lean-forward="false" selection-start-line="636" selection-start-column="0" selection-end-line="636" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/math_calcs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="4" lean-forward="false" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results/extract_data.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="816">
+          <caret line="48" column="20" lean-forward="false" selection-start-line="48" selection-start-column="20" selection-end-line="48" selection-end-column="39" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1194,43 +1218,43 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/import_stock_data.py">
+    <entry file="file://$PROJECT_DIR$/utils/stock_utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="94">
-          <caret line="31" column="76" lean-forward="true" selection-start-line="31" selection-start-column="20" selection-end-line="31" selection-end-column="76" />
+        <state relative-caret-position="123">
+          <caret line="76" column="0" lean-forward="false" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
           <folding>
-            <element signature="e#0#29#0" expanded="true" />
+            <element signature="e#0#34#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/results/generate_data.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-266">
-          <caret line="110" column="0" lean-forward="true" selection-start-line="110" selection-start-column="0" selection-end-line="110" selection-end-column="0" />
+        <state relative-caret-position="1755">
+          <caret line="151" column="75" lean-forward="false" selection-start-line="151" selection-start-column="75" selection-end-line="151" selection-end-column="75" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/stock_utils.py">
+    <entry file="file://$PROJECT_DIR$/import_stock_data.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="120" column="0" lean-forward="false" selection-start-line="120" selection-start-column="0" selection-end-line="120" selection-end-column="0" />
+        <state relative-caret-position="402">
+          <caret line="31" column="76" lean-forward="false" selection-start-line="31" selection-start-column="20" selection-end-line="31" selection-end-column="76" />
           <folding>
-            <element signature="e#0#34#0" expanded="true" />
+            <element signature="e#0#29#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/strategies.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="16" column="48" lean-forward="false" selection-start-line="16" selection-start-column="48" selection-end-line="16" selection-end-column="48" />
+        <state relative-caret-position="402">
+          <caret line="265" column="41" lean-forward="false" selection-start-line="265" selection-start-column="29" selection-end-line="265" selection-end-column="41" />
           <folding>
             <element signature="e#0#34#0" expanded="true" />
-            <marker date="1630982608113" expanded="true" signature="14935:15137" ph="..." />
+            <marker date="1631045707521" expanded="true" signature="15008:15210" ph="..." />
           </folding>
         </state>
       </provider>
