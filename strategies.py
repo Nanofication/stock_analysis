@@ -15,6 +15,7 @@ def backTestDipAndRip(rootPath='D:/The Fastlane Project/Coding Projects/Stock An
     :return:
     """
     intradayData = [f for f in listdir(rootPath)]
+    dataList = list()
 
     for dataPath in intradayData:
         file = dataPath.split('/')[-1]
@@ -28,9 +29,12 @@ def backTestDipAndRip(rootPath='D:/The Fastlane Project/Coding Projects/Stock An
         dipRip = DipAndRip(df, date, 10000000)
         try:
             print("Ticker: {0}".format(ticker))
+            dataList.append(dipRip.backTest(shareCount=100))
             print(dipRip.backTest(shareCount=100).to_string())
         except Exception as e:
             print(e)
+
+    return pd.concat(dataList)
 
 
 def readIntradayDataAV(df):
@@ -210,6 +214,12 @@ class DailyChartBase:
     def getPremarketHigh(self):
         return self.premarket.sort_values(by=['High'], ascending=False).iloc[0]['High']
 
+    def getPremarketVolume(self):
+        return self.premarket['Volume'].sum()
+
+    def getRegularVolume(self):
+        return self.regularMarket['Volume'].sum()
+
     def getPremarketHighTime(self):
         return self.premarket.sort_values(by=['High'], ascending=False).iloc[0]['Time']
 
@@ -218,9 +228,6 @@ class DailyChartBase:
 
     def getPremarketLowTime(self):
         return self.premarket.sort_values(by=['Low'], ascending=True).iloc[0]['Time']
-
-    def getPremarketVolume(self):
-        return self.premarket.sum(by=['High'], ascending=False).iloc[0]
 
 class DipAndRip(DailyChartBase):
     """
@@ -248,7 +255,7 @@ class DipAndRip(DailyChartBase):
         enterTime = datetime.time(7,0)
 
         sharesBought = 0
-        lowStopPrice = self.getPremarketLow() # Low Stop Level
+        lowStopPrice = self.regularMarket.iloc[0]['Low']# Low Stop Level
         highOfPattern = self.getPremarketHigh()
         highTime = self.getPremarketHighTime()
         tradeEntered = False
@@ -273,6 +280,7 @@ class DipAndRip(DailyChartBase):
                             'Start Time': enterTime,
                             'End Time': self.exitTime,
                             'Entry Price': enterPrice,
+                            'Premarket Volume': self.getPremarketVolume(),
                             'Shares Bought': sharesBought,
                             'Stop Loss': lowStopPrice,
                             'High Price': highOfPattern,
@@ -294,6 +302,7 @@ class DipAndRip(DailyChartBase):
                             'Start Time': enterTime,
                             'End Time': self.exitTime,
                             'Entry Price': enterPrice,
+                            'Premarket Volume': self.getPremarketVolume(),
                             'Shares Bought': sharesBought,
                             'Stop Loss': lowStopPrice,
                             'High Price': highOfPattern,
@@ -310,7 +319,8 @@ class DipAndRip(DailyChartBase):
 
 if __name__ == '__main__':
     # stock = 'AAPL' #TODO: API Crashed, check results tomorrow (We may need to figure out a way to pull and calculate data faster
-    backTestDipAndRip()
+    data = backTestDipAndRip()
+    data.to_excel('D:/The Fastlane Project/Coding Projects/Stock Analysis/results/backtest_dip_and_rip_data/dnp_result.xlsx')
     dateTimeStrStart = '2021-2-5 4:00'
     # dateTimeStrEnd = '2021-8-10 16:00'
     dateTimeStart = datetime.datetime.strptime(dateTimeStrStart, '%Y-%m-%d %H:%M')
